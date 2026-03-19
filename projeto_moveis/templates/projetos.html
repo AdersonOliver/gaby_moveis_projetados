@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio | Gaby Móveis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+    <div class="nav-container">
+        <a href="/" class="brand-link">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" class="logo-img" alt="Logo Gaby Móveis">
+            <div class="logo-text-group">
+                <h1 class="logo-text">GABY MÓVEIS</h1>
+                <span class="logo-subtext">PROJETADOS</span>
+            </div>
+        </a>
+
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="/">INÍCIO</a></li>
+            <li><a href="/projetos">PROJETOS</a></li>
+            <li><a href="#contato">CONTATO</a></li>
+        </ul>
+    </div>
+</nav>
+
+    <main class="container">
+        <div class="section-title">
+            <h2>Portfólio de Projetos</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="gallery-wrapper">
+            {% for movel in moveis %}
+            <div class="gallery-card">
+                <div class="card-img">
+                    <img src="{{ url_for('static', filename='img/' + movel.imagem_url) }}" alt="{{ movel.nome }}">
+                </div>
+                <div class="card-info">
+                    <span class="categoria">{{ movel.categoria }}</span>
+                    <h3>{{ movel.nome }}</h3>
+                    <p>{{ movel.descricao }}</p>
+                    <a href="https://wa.me/55987529491" class="btn-card">Solicitar Orçamento</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <script>
+        const menu = document.querySelector('#mobile-menu');
+        const menuLinks = document.querySelector('.nav-links');
+
+        menu.addEventListener('click', function() {
+            menu.classList.toggle('is-active');
+            menuLinks.classList.toggle('active');
+        });
+    </script>
+
+</body>
+</html>
